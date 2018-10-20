@@ -16,7 +16,6 @@ plugins:
 
 functions:
   webhook:
-    name: webhook
     handler: handler.webhook
     role: ${env:AWS_LAMBDA_IAM_ROLE}
     events:
