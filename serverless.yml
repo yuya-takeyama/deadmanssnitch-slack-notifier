@@ -1,0 +1,23 @@
+service: dead-mans-snitch-slack-notifier
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: production
+  region: us-east-1
+  environment:
+    SLACK_TOKEN: ${env:SLACK_TOKEN}
+    ICON_EMOJI: ':male-police-officer:'
+  memorySize: 256
+  timeout: 10
+
+plugins:
+  - serverless-webpack
+
+functions:
+  webhook:
+    name: webhook
+    handler: handler.webhook
+    role: ${env:AWS_LAMBDA_IAM_ROLE}
+    events:
+      - http: POST webhook
